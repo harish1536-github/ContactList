@@ -1,0 +1,69 @@
+<!--ejs extension because ejs template engine
+ efined that we need to put this extension 
+so that it can read thrugh and find that 
+allegation and percentage marks 
+and execute javascript code inside
+-->
+
+
+       <!-- display a variable we use %= that is elegatir mouth-->
+            <!-- local is a global object res is also an object 
+                it has different keys 
+            whenever i am passing on something fromtemplate
+        this title is passed from v0iew or templatte
+    one of this keys is locals and this key is an object
+when i pass this title this whole object gtes substituted over 
+locals:{
+title:"Contact List"
+}
+locals is available to all my views irrespective of template engine used.
+-->
+<html>
+    <head>
+        <title>
+     
+            <%= title %>
+        </title>
+        <!--/css means to the root of my assests folder-->
+        <link rel="stylesheet" href="/css/all.css">
+        <!-- our css wil be below every other site so that i can overide it -->
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+    <body align="center">
+        <h1 id="page-heading">
+            <i class="fas fa-address-book"></i>
+            My Contact List</h1>
+   <div id="contacts-list-container">
+        <ul>           
+                <% for (let i of contact_list)  { %>
+            <li class="contact"> 
+                <div class="details">
+                    <p><%= i.name %></p>
+                    <p><%= i.phone %></p>
+                </div>
+            
+            <div class="delete-button">
+                    <a href="/delete-contact/?id=<%=i._id%>">
+                        <i class="fas fa-window-close"></i>
+                    </a>
+            </div>
+            </li>
+                <% } %>
+        </ul>
+   </div>
+        <!--form action specifies where we want to send the data 
+        -->
+        <form action="/create-contact" method="POST">
+            <!--name attribute is used for whenever sending data we need to recognse
+            send it in form of object 
+        name :value;
+    phone :value;
+        name="kjha"
+    is key in object-->
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="number" name="phone" placeholder="Phone" required>
+            <button type="submit">Add</button>
+        </form>
+        <script type="text/javascript" src="/js/home.js"></script>
+    </body>
+</html>
